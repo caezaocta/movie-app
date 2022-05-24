@@ -70,16 +70,16 @@ const App = () => {
       <GlobalStyles />
       <StyledApp>
         <div className="container movie-app ">
-          <div className="row mt-3 mb-4 d-flex justify-content-between align-items-center">
-            <MovieListHeading heading='Movies' />
-            <div className="col-3">
-              <div class="form-check form-switch" style={{ 'transform': "scale(1.5)" }}>
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={() => themeToggler()} />
+          <div className="topbar">
+            <div className="row mt-3 mb-4 d-flex justify-content-between  align-items-center ml-auto">
+              <MovieListHeading heading='Movies' />
+              <SearchBox value={searchValue} setSearchValue={setSearchValue} />
+              <div className="col-4 ms-auto">
+                <div class="form-check form-switch" style={{ 'transform': "scale(1.5)" }} >
+                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={() => themeToggler()} />
+                </div>
               </div>
-              {/* 
-              <button className="btn btn-primary" onClick={() => themeToggler()}>Change Theme</button> */}
             </div>
-            <SearchBox value={searchValue} setSearchValue={setSearchValue} />
           </div>
           <div className="row">
             <MovieList movie={movies}

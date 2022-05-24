@@ -3,6 +3,10 @@ body {
     color: white;
 }
 
+.movie-app>.topbar {
+    overflow: hidden;
+}
+
 .movie-app>.row {
     overflow-x: auto;
     white-space: nowrap;
@@ -47,6 +51,8 @@ body {
 .form-switch .form-check-input {
     height: 24px;
     width: 48px;
+    margin-bottom: 8px;
+    margin-left: 250px;
 }
 
 .form-switch .form-check-input {
