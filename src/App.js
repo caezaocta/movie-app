@@ -3,34 +3,54 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import MovieList from './components/MovieList'
 import MovieListHeading from './components/MovieListHeading'
 import SearchBox from './components/SearchBox'
+import AddFavorite from './components/AddFavorite'
 import './App.css'
 
 const App = () => {
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+  const [favorites, setFavorites] = useState([])
 
-  const getMovieRequest = async () => {
-    const url = `http://www.omdbapi.com/?s=avengers&apikey=9a6a7701`;
+  const getMovieRequest = async (searchValue) => {
+    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=9a6a7701`;
 
     const response = await fetch(url);
     const responseJson = await response.json();
 
-    console.log(responseJson)
-    setMovies(responseJson.Search)
+    if (responseJson.Search) {
+      setMovies(responseJson.Search)
+    }
   }
 
   useEffect(() => {
-    getMovieRequest();
-  }, [])
+    getMovieRequest(searchValue);
+  }, [searchValue])
+
+  const addFavoriteMovie = (movie) => {
+    const newFavoriteList = [...favorites, movie]
+    setFavorites(newFavoriteList)
+  }
 
   return (
-    <div className="container-fluid movie-app ">
-      <div className="row mt-2 mb-3 d-flex justify-content-between">
+    <div className="container movie-app ">
+      <div className="row mt-3 mb-4 d-flex justify-content-between align-items-center">
         <MovieListHeading heading='Movies' />
-        <SearchBox />
+        <SearchBox value={searchValue} setSearchValue={setSearchValue} />
       </div>
-      <div className="row g-0">
-        <MovieList movie={movies} />
+      <div className="row">
+        <MovieList movie={movies}
+          favoriteComponent={AddFavorite}
+          handleFavoritesClick={addFavoriteMovie}
+        />
+      </div>
+      <div className="row mt-5 mb-4 d-flex justify-content-between align-items-center">
+        <MovieListHeading heading='Favorites' />
+      </div>
+      <div className="row">
+        <MovieList movie={favorites}
+          favoriteComponent={AddFavorite}
+          handleFavoritesClick={addFavoriteMovie}
+        />
       </div>
     </div>
   );

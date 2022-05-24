@@ -16,6 +16,31 @@ body {
     display: inline-block;
 }
 
+.image-container {
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.image-container:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.image-container:hover .overlay {
+    opacity: 1;
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    bottom: 0;
+    font-weight: bold;
+    padding: 32px;
+    opacity: 0;
+    text-align: center;
+}
+
 
 /* .movie-app>.row::-webkit-scrollbar {
     display: none;
