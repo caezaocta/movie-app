@@ -5,12 +5,26 @@ import MovieListHeading from './components/MovieListHeading'
 import SearchBox from './components/SearchBox'
 import AddFavorite from './components/AddFavorite'
 import RemoveFavorite from './components/RemoveFavorite'
+
 import './App.css'
+import styled, { ThemeProvider } from 'styled-components'
+import { lightTheme, darkTheme, GlobalStyles } from './themes'
+
+const StyledApp = styled.div`
+  color: ${(props) => props.theme.fontColor};
+`;
+
 
 const App = () => {
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [favorites, setFavorites] = useState([])
+  const [theme, setTheme] = useState("dark")
+  const themeToggler = () => {
+    theme === "light" ? setTheme("dark") : setTheme("light")
+    console.log("hello")
+  };
+
 
   const getMovieRequest = async (searchValue) => {
     const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=9a6a7701`;
@@ -50,28 +64,41 @@ const App = () => {
     saveToLocalStorage(newFavoriteList)
   }
 
+
   return (
-    <div className="container movie-app ">
-      <div className="row mt-3 mb-4 d-flex justify-content-between align-items-center">
-        <MovieListHeading heading='Movies' />
-        <SearchBox value={searchValue} setSearchValue={setSearchValue} />
-      </div>
-      <div className="row">
-        <MovieList movie={movies}
-          favoriteComponent={AddFavorite}
-          handleFavoritesClick={addFavoriteMovie}
-        />
-      </div>
-      <div className="row mt-5 mb-4 d-flex justify-content-between align-items-center">
-        <MovieListHeading heading='Favorites' />
-      </div>
-      <div className="row">
-        <MovieList movie={favorites}
-          favoriteComponent={RemoveFavorite}
-          handleFavoritesClick={removeFavoriteMovie}
-        />
-      </div>
-    </div>
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <GlobalStyles />
+      <StyledApp>
+        <div className="container movie-app ">
+          <div className="row mt-3 mb-4 d-flex justify-content-between align-items-center">
+            <MovieListHeading heading='Movies' />
+            <div className="col-3">
+              <div class="form-check form-switch" style={{ 'transform': "scale(1.5)" }}>
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={() => themeToggler()} />
+              </div>
+              {/* 
+              <button className="btn btn-primary" onClick={() => themeToggler()}>Change Theme</button> */}
+            </div>
+            <SearchBox value={searchValue} setSearchValue={setSearchValue} />
+          </div>
+          <div className="row">
+            <MovieList movie={movies}
+              favoriteComponent={AddFavorite}
+              handleFavoritesClick={addFavoriteMovie}
+            />
+          </div>
+          <div className="row mt-5 mb-4 d-flex justify-content-between align-items-center">
+            <MovieListHeading heading='Favorites' />
+          </div>
+          <div className="row">
+            <MovieList movie={favorites}
+              favoriteComponent={RemoveFavorite}
+              handleFavoritesClick={removeFavoriteMovie}
+            />
+          </div>
+        </div>
+      </StyledApp>
+    </ThemeProvider >
   );
 };
 
