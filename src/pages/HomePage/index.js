@@ -23,6 +23,7 @@ const HomePage = () => {
     const themeToggler = () => {
         theme === "dark" ? setTheme("light") : setTheme("dark")
         console.log("hello")
+        saveToLocalStorageToggleDarkMode(theme)
     };
 
 
@@ -37,6 +38,14 @@ const HomePage = () => {
         }
     }
 
+
+    useEffect(() => {
+        const themeToggler = JSON.parse(localStorage.getItem('toggle-dark-mode')
+        );
+        themeToggler === "dark" ? setTheme("light") : setTheme('dark')
+
+    }, [])
+
     useEffect(() => {
         getMovieRequest(searchValue);
     }, [searchValue])
@@ -46,6 +55,10 @@ const HomePage = () => {
         );
         setFavorites(movieFavorites);
     }, [])
+
+    const saveToLocalStorageToggleDarkMode = (items) => {
+        localStorage.setItem('toggle-dark-mode', JSON.stringify(items))
+    }
 
     const saveToLocalStorage = (items) => {
         localStorage.setItem('react-movie-app-favorites', JSON.stringify(items))
