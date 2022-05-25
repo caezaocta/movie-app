@@ -34,6 +34,11 @@ body {
     opacity: 1;
 }
 
+.searchBar input:focus {
+    border: red 1px solid;
+    box-shadow: none;
+}
+
 .overlay {
     position: absolute;
     width: 100%;
