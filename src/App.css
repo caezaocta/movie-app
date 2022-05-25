@@ -11,6 +11,11 @@ body {
     overflow-x: auto;
     white-space: nowrap;
     display: block;
+    overflow-y: hidden;
+}
+
+.movie-app>.row::-webkit-scrollbar {
+    display: none;
 }
 
 .movie-app>.row>.col-8,

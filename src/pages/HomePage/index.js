@@ -103,7 +103,7 @@ const HomePage = () => {
                     <div className="row mt-5 mb-4 d-flex justify-content-between align-items-center">
                         <MovieListHeading heading='Favorites' />
                     </div>
-                    <div className="row">
+                    <div className="row mb-5">
                         <MovieList movie={favorites}
                             favoriteComponent={RemoveFavorite}
                             handleFavoritesClick={removeFavoriteMovie}
