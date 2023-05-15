@@ -5,26 +5,24 @@ const OverlayText = styled.div`
 `
 
 const MovieList = (props) => {
-    const FavoriteComponent = props.favoriteComponent
-    return (
-        <>
-            {
+	const FavoriteComponent = props.favoriteComponent
+	return (
+		<>
+			{props.movies?.map((movie, index) => (
+				<div key={movie.imdbID} className="col-8 col-sm-12 col-md-6 col-lg-3 me-3 text-center image-container">
+					<img src={movie.Poster} alt={movie.Title} />
 
-                props.movie.map((movie, index) => (
-                    <div className="col-8 col-sm-12 col-md-6 col-lg-3 me-3 text-center">
-                        <div className="image-container">
-                            <img src={movie.Poster} alt={movie.Title} />
-                            <OverlayText>
-                                <div
-                                    onClick={() => props.handleFavoritesClick(movie)}
-                                    className="overlay d-flex align-items-center justify-content-center"><FavoriteComponent /></div>
-                            </OverlayText>
-                        </div>
-                    </div>
-                ))
-            }
-        </>
-    );
+					<button className="overlay d-flex align-items-center justify-content-center"
+						onClick={() => props.handleFavoritesClick(movie)}
+					><FavoriteComponent />
+					</button>
+
+					<OverlayText>
+					</OverlayText>
+				</div>
+			))}
+		</>
+	);
 };
 
 export default MovieList;

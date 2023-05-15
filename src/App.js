@@ -4,9 +4,9 @@ import './App.css'
 
 const App = () => {
 
-  return (
-    <HomePage></HomePage>
-  );
+	return (
+		<HomePage></HomePage>
+	);
 };
 
 export default App;

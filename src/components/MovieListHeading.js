@@ -1,7 +1,7 @@
-const MovieListHeading = (props) => {
+const MovieListHeading = ({ heading }) => {
     return (
         <div className="col-4 me-auto">
-            <h1>{props.heading}</h1>
+            <h1>{heading}</h1>
         </div>
     )
 }
